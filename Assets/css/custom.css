@@ -1,0 +1,10 @@
+/* CSS Custom aqui */
+a{
+    color: orangered;
+}
+a:hover{
+    color: darkblue;
+}
+.app-sidebar .logo .sidebar-user-switcher .user-info-text .user-state-info {
+    font-size: 10px;
+}
