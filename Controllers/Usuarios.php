@@ -110,7 +110,7 @@ class Usuarios extends Controller
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
     }
-    //Registra un usuario por el id
+    //Elimina un usuario por el id
     public function delete($id)
     {
         $data = $this->model->delete($id);

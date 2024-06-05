@@ -30,7 +30,7 @@
 </head>
 <?php
 if (empty($_SESSION['nombre'])) {
-    header("Location: http://localhost/neuro/");
+    header("Location: ".BASE_URL);
     exit();
 } ?>
 <!DOCTYPE html>
@@ -40,7 +40,7 @@ if (empty($_SESSION['nombre'])) {
     <div class="app align-content-stretch d-flex flex-wrap">
         <div class="app-sidebar">
             <div class="logo">
-                <a href="http://localhost/neuro/admin" class="logo-icon"><span class="logo-text">Neuro</span></a>
+                <a href="<?php echo BASE_URL.'admin'?>" class="logo-icon"><span class="logo-text">Neuro</span></a>
                 <div class="sidebar-user-switcher user-activity-online">
                     <a href="#" id="ad">
                         <img id="perfil" src="<?php echo BASE_URL . 'Assets/images/neuro.png'; ?>">

@@ -1,5 +1,5 @@
 <?php
-const BASE_URL = "http://localhost/neuro/";
+const BASE_URL = "http://localhost/gestorNeuro/";
 const HOST = "localhost";
 const USER = "root";
 const PASS = "";

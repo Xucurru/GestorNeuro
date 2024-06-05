@@ -8,3 +8,16 @@ a:hover{
 .app-sidebar .logo .sidebar-user-switcher .user-info-text .user-state-info {
     font-size: 10px;
 }
+
+.mailbox-open-content{
+    position: relative;
+}
+.mailbox-open-content p{
+    position: absolute;
+    bottom: 0;
+}
+
+.dropdown-menu-end.show::after {
+       right: 23px;
+        left: auto;
+    }

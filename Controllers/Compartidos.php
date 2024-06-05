@@ -8,7 +8,7 @@ class Compartidos extends Controller
         parent::__construct();
         session_start();
         if (empty($_SESSION['id'])) {
-            header("Location: ".BASE_URL); 
+            header("Location: " . BASE_URL);
             exit();
         }
         $this->id_usuario = $_SESSION['id'];
@@ -20,7 +20,7 @@ class Compartidos extends Controller
         $data['title'] = 'Neuro - Compartidos';
         $data['script'] = 'compartidos.js';
         $data['archivos'] = $this->model->getArchivosCompartidos($this->correo);
-        
+
         $this->views->getView('admin', 'compartidos', $data);
     }
     public function verDetalle($id_detalle)
@@ -28,6 +28,20 @@ class Compartidos extends Controller
         $data = $this->model->getDetalle($id_detalle);
         $data['fecha'] = time_ago(strtotime($data['fecha_add']));
         echo json_encode($data);
+        die();
+    }
+
+    //Elimina un compartido por el id
+    public function delete($id)
+    {
+        $data = $this->model->delete($id);
+        if ($data == 1) {
+            $res = array('tipo' => 'success', 'mensaje' => 'Archivo Eliminado');
+            echo json_encode($res);
+        } else {
+            $res = array('tipo' => 'error', 'mensaje' => 'Error al eliminar el archivo');
+            echo json_encode($res);
+        }
         die();
     }
 }

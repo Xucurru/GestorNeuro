@@ -1,5 +1,5 @@
 <?php
-class Admin extends Controller
+class Compartido extends Controller
 {
     private $id_usuario;
     public function __construct()
@@ -19,10 +19,10 @@ class Admin extends Controller
         $data['active'] = 'recent';
         $data['script'] = 'file.js';
         $carpetas = $this->model->getCarpetas($this->id_usuario);
-        $data['archivos'] = $this->model->getArchivosRecientes($this->id_usuario);
+        $data['archivos'] = $this->model->getArchivos($this->id_usuario);
 
         for ($i = 0; $i < count($data['archivos']); $i++) {
-            $data['archivos'][$i]['fecha'] = time_ago(strtotime($data['archivos'][$i]['fecha_create']));
+            $data['archivos'][$i]['fecha'] = time_ago(strtotime($data['archivos'][$i]['fecha_add']));
         }
 
         for ($i = 0; $i < count($carpetas); $i++) {
@@ -30,7 +30,7 @@ class Admin extends Controller
             $carpetas[$i]['fecha'] = time_ago(strtotime($carpetas[$i]['fecha_create']));
         }
         $data['carpetas'] = $carpetas;
-        $this->views->getView('admin', 'home', $data);
+        $this->views->getView('admin', 'compartido', $data);
     }
 
     public function crearcarpeta()
@@ -80,9 +80,6 @@ class Admin extends Controller
             $destino = 'Assets/archivos';
             if(!file_exists($destino)){
                 mkdir($destino);
-            }
-            if(is_array($id_carpeta)){
-                $id_carpeta = $id_carpeta['id'];
             }
             $carpeta = $destino .'/' .$id_carpeta;
             if(!file_exists($carpeta)){

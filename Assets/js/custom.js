@@ -3,7 +3,7 @@
 //Alertas de plugin sweetalert2
 function alertaPersonalizada(type, mensaje) {
   Swal.fire({
-    position: "top-end",
+    position: "center",
     icon: type,
     title: mensaje,
     showConfirmButton: false,
@@ -21,6 +21,7 @@ function eliminarRegistro(title, text, accion, url, table) {
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
     confirmButtonText: accion,
+    cancelButtonText: "Cancelar",
   }).then((result) => {
     if (result.isConfirmed) {
       const http = new XMLHttpRequest();
@@ -35,7 +36,12 @@ function eliminarRegistro(title, text, accion, url, table) {
           alertaPersonalizada(res.tipo, res.mensaje);
           //si a podido eliminar usuario lo borra de la tabla
           if(res.tipo == 'success'){
-            table.ajax.reload();
+            if(table = "ventana"){
+              setTimeout(function() {window.location.reload()}, 1500); 
+            }else{
+              table.ajax.reload();
+            }
+            
           }
         }
       };

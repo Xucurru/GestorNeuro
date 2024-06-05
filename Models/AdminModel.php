@@ -39,7 +39,7 @@ class AdminModel extends Query
     //Funcion que lista los 10 ultimos archivos de 1 usuario
     public function getArchivosRecientes($id_usuario)
     {
-        $sql = "SELECT a.* FROM archivos a INNER JOIN carpetas c ON a.id_carpeta = c.id WHERE c.id_usuario = $id_usuario ORDER BY a.id DESC LIMIT 10";
+        $sql = "SELECT a.* FROM archivos a INNER JOIN carpetas c ON a.id_carpeta = c.id WHERE (c.id_usuario = $id_usuario) AND (a.estado = 1) ORDER BY a.id DESC LIMIT 10";
         return $this->selectAll($sql);
     }
 
@@ -81,6 +81,10 @@ class AdminModel extends Query
     //subir archivos
     public function subirArchivo($nombre, $tipo, $id_carpeta)
     {
+        if(is_array($id_carpeta)){
+            $id_carpeta = $id_carpeta['id'];
+        }
+
         $sql = "INSERT INTO archivos (nombre, tipo, id_carpeta) VALUES (?,?, ?)";
         $datos = array($nombre, $tipo, $id_carpeta);
         return $this->insertar($sql, $datos);

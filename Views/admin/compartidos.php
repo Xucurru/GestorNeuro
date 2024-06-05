@@ -13,16 +13,13 @@
                                                 <?php foreach ($data['archivos'] as $archivo) {?>
                                                     <li class="mailbox-list-item">
                                                     <a href="#" id="<?php echo $archivo['id']?>" class="compartidos">
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="checkbox" value="">
-                                                        </div>
                                                         <img src="<?php echo BASE_URL . 'Assets/images/neuro.png'?>" alt="">
                                                         <div class="mailbox-list-item-content">
                                                             <span class="mailbox-list-item-title">
-                                                                <?php echo $archivo['nombre']?>
+                                                                <?php echo $archivo['archivo'] ?>
                                                             </span>
                                                             <p class="mailbox-list-item-text">
-                                                                Te ha compartido un archivo    
+                                                            <?php echo $archivo['archivo'] ?> te ha compartido <?php echo $archivo['archivo'] ?>
                                                             </p>
                                                         </div>
                                                     </a>

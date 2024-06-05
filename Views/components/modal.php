@@ -64,7 +64,7 @@
 </div>
 
 <div id="modalUsuarios" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
-    <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="title-Usuarios">Compartir con:</h5>
@@ -72,27 +72,27 @@
                 </button>
             </div>
             <form id="frmCompartir">
-                <div class="modal-body">
+                <div class="modal-body " style="max-height: 500px;">
                     <div id="container-archivos">
-                        <input type="hidden" id="id_archivo" name="archivos[]">
+                        <input type="text" id="id_archivo" name="archivos[]">
                     </div>
                     <select class="js-states form-control" id="usuarios" name="usuarios[]" multiple="multiple" tabindex="-1" style="display: none; width: 100%">
                     </select>
-                
+
                     <hr>
-            <div class="table-responsive" id="tblDetalle">
-                <table class="table table-light-striped">
-                    <thead>
-                        <tr>
-                            <th>Archivo</th>
-                            <th>Usuario</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            </div>
+                    <div class="table-responsive" id="tblDetalle">
+                        <table class="table table-light-striped">
+                            <thead>
+                                <tr>
+                                    <th>Archivo</th>
+                                    <th>Usuario</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
 
                 </div>
                 <div class="modal-footer">
@@ -100,7 +100,7 @@
                     <button class="btn btn-primary" type="submit">Compartir</button>
                 </div>
             </form>
-            
+
 
         </div>
     </div>

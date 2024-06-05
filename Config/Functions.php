@@ -8,21 +8,26 @@
       if ($diferencia < 1) {
           return 'Justo ahora';
       }
+  
       $condicion = array(
-          12 * 30 * 24 * 60 * 60  => 'año',
-          30 * 24 * 60 * 60 => 'mes',
-          24 * 60 * 60 => 'dia',
-          60 * 60 => 'hora',
-          60 => 'minuto',
-          1 => 'segundo'
+          12 * 30 * 24 * 60 * 60 => array('singular' => 'año', 'plural' => 'años'),
+          30 * 24 * 60 * 60 => array('singular' => 'mes', 'plural' => 'meses'),
+          24 * 60 * 60 => array('singular' => 'día', 'plural' => 'días'),
+          60 * 60 => array('singular' => 'hora', 'plural' => 'horas'),
+          60 => array('singular' => 'min', 'plural' => 'mins'),
+          1 => array('singular' => 'seg', 'plural' => 'segs')
       );
+  
       foreach ($condicion as $secs => $str) {
           $d = $diferencia / $secs;
           if ($d >= 1) {
-              //redondear
+              // redondear
               $t = round($d);
-              return 'hace ' . $t . ' ' . $str . ($t > 1 ? 's' : '');
+              // seleccionar singular o plural
+              $unidad = $t > 1 ? $str['plural'] : $str['singular'];
+              return 'hace ' . $t . ' ' . $unidad;
           }
       }
   }
+  
 ?>

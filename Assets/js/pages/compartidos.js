@@ -1,11 +1,22 @@
 const compartidos = document.querySelectorAll(".compartidos");
 document.addEventListener("DOMContentLoaded", function () {
+let deleteCompartir = document.querySelectorAll(".deletecompartir");
   compartidos.forEach((row) => {
     row.addEventListener("click", function (e) {
+        e.preventDefault();
       let id_detalle = this.getAttribute("id");
       verDetalle(id_detalle);
+      deleteCompartir = document.querySelectorAll(".deletecompartir");
     });
   });
+
+  
+  
+  deleteCompartir.forEach(btnDelete => {
+    console.log(btnDelete.getAttribute("ids"));
+    btnDelete.addEventListener('click', eliminarCompartido)
+  });
+
 });
 
 //peticion ajax
@@ -30,11 +41,10 @@ function verDetalle(id_detalle) {
               <span class="mailbox-open-author-info-to">Para <span class="badge badge-info align-self-center">${res.correo}</span></span>
           </div>
           <div class="mailbox-open-actions">
-              <a href="#" class="btn btn-danger">Eliminar</a>
+              <button idC="${res.id}" class="btn btn-danger deletecompartir" onclick="eliminarCompartido(this)">Eliminar</button>
           </div>
       </div>
       <div class="mailbox-open-content-email">
-          <p>Sino quiere recibir este archivo o quiere borrarlo de compartidos pulse en el boton de borrar</p>
           <div class="mailbox-open-content-email-attachments">
               <ul class="attachments-files-list list-unstyled">
                   <li class="attachments-files-list-item">
@@ -53,6 +63,7 @@ function verDetalle(id_detalle) {
                   </li>
               </ul>
           </div>
+          <p>*Sino quiere recibir este archivo o quiere borrarlo de compartidos pulse en el boton de eliminar</p>
       </div>
       <div class="mailbox-open-content-reply">
           <div id="reply-editor"></div>
@@ -60,4 +71,13 @@ function verDetalle(id_detalle) {
       document.querySelector('#content-info').innerHTML = html;
     }
   };
+}
+
+function  eliminarCompartido(event){
+    let id = event.getAttribute("idc");
+
+    let nombre = document.querySelector('.attachments-files-list-item-title').textContent
+    let url = base_url + 'compartidos/delete/'+id
+    console.log(nombre.textContent);
+    eliminarRegistro("¿Esta seguro de eliminar " +nombre+"?", 'El archivo no se podrá descargar nuevamente', 'Eliminar', url, "ventana");
 }

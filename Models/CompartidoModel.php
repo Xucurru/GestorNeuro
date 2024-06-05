@@ -1,15 +1,15 @@
 <?php
-class ArchivosModel extends Query
+class CompartidoModel extends Query
 {
     public function __construct()
     {
         parent::__construct();
     }
 
-    //Funcion que lista los archivos de 1 carpeta
+    //Funcion que lista los archivo de 1 carpeta
     public function getArchivos($id_usuario)
     {
-        $sql = "SELECT a.* FROM archivos a INNER JOIN carpetas c ON a.id_carpeta = c.id WHERE  c.id_usuario = $id_usuario AND a.estado = 1 ORDER BY a.id DESC";
+        $sql = "SELECT a.*, d.fecha_add, d.correo FROM archivos a INNER JOIN detalle_archivos d ON a.id = d.id_archivo WHERE  d.id_usuario = 1 AND a.estado = 1 ORDER BY a.id DESC";
         return $this->selectAll($sql);
     }
 
@@ -20,9 +20,9 @@ class ArchivosModel extends Query
         return $this->selectAll($sql);
     }
 
-    public function getUsuarios($valor, $id_usuario)
+    public function getUsuarios($valor)
     {
-        $sql = "SELECT * FROM usuarios WHERE (correo LIKE '%".$valor."%' OR nombre LIKE '%".$valor."%') AND (estado = 1 OR estado = 2) AND(id !=$id_usuario) LIMIT 10";
+        $sql = "SELECT * FROM usuarios WHERE (correo LIKE '%".$valor."%' OR nombre LIKE '%".$valor."%') AND (estado = 1 OR estado = 2) LIMIT 10";
         return $this->selectAll($sql);
     }
 
@@ -43,27 +43,21 @@ class ArchivosModel extends Query
 
     //Devuelve el id del detalle archivo si el correo y el archivo existen
     public function getDetalle($correo, $id_archivo){
-        $sql = "SELECT id FROM detalle_archivos WHERE correo = '$correo' AND id_archivo = $id_archivo AND estado = 1";
+        $sql = "SELECT id FROM detalle_archivos WHERE correo = '$correo' AND id_archivo = $id_archivo";
         return $this->select($sql);
     }
 
     //devuelve los archivos de 1 carpeta
     public function getArchivosCarpeta($id_carpeta)
     {
-        $sql = "SELECT * FROM archivos WHERE  id_carpeta = $id_carpeta AND estado = 1";
+        $sql = "SELECT * FROM archivos WHERE  id_carpeta = $id_carpeta";
         return $this->selectAll($sql);
-    }
-
-    public function papelera($id){
-        $sql = "UPDATE archivos SET estado = ? WHERE id = ?";
-        $datos = array(0, $id);
-        return $this->save($sql, $datos);
     }
 
     //devuelve de todos los archivo de una carpeta: el id del detalle, el correo de a quien se a compartido el archivo, el nombre del archivo
     public function getArchivosCompartidos($id_carpeta)
     {
-        $sql = "SELECT d.id, d.correo, a.nombre FROM detalle_archivos d INNER JOIN archivos a ON d.id_archivo = a.id WHERE a.id_carpeta = $id_carpeta AND d.estado = 1";
+        $sql = "SELECT d.id, d.correo, a.nombre FROM detalle_archivos d INNER JOIN archivos a ON d.id_archivo = a.id WHERE a.id_carpeta = $id_carpeta";
         return $this->selectAll($sql);
     }
     

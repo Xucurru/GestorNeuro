@@ -29,7 +29,7 @@ html {
 }
 
 body {
-    background-color: #ffe6d6;
+    background-color: #f4e0d3;
     font-weight: normal;
     color: #24292e;
     line-height: 1.6;
@@ -1787,6 +1787,7 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .app-content .content-menu + .content-wrapper .page-description {
+        padding-left: 0px;
         margin: 0 0 30px!important;
     }
 
@@ -3640,6 +3641,8 @@ a.badge {
 }
 
 .card .card-body {
+    max-height: 150px;
+    min-height: 94px;
     padding: 25px 30px;
 }
 
