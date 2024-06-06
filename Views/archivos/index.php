@@ -11,7 +11,7 @@
                             <h1>Mis carpetas</h1>
                         </div>
                         <div class="page-description-actions">
-                            <a href="#" class="btn btn-primary" id="btnUpload"><i class="material-icons">add</i>Subir Archivo</a>
+                            <a href="#" class="btn btn-primary" id="btnUpload"><i class="material-icons" style="margin-right: -10px;margin-left: -10px;">add</i></a>
                         </div>
                     </div>
                 </div>
@@ -47,9 +47,9 @@
                                     <span class="p-h-sm text-muted"><?php echo $archivo['fecha'] ?></span>
                                     <a href="#" class="dropdown-toggle file-manager-recent-file-actions" id="file-manager-recent-<?php echo $archivo['id']?>" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="file-manager-recent-<?php echo $archivo['id'];?>">
-                                        <li><a class="dropdown-item compartir" href="#" id="<?php echo $archivo['id'];?>"><i class="material-icons">share</i>Compartir</a></li>
-                                        <li><a class="dropdown-item" href="<?php echo BASE_URL . 'Assets/archivos/'.$archivo['id_carpeta'].'/'.$archivo['nombre']?>" download="<?php echo $archivo['nombre']?>"><i class="material-icons">download</i>Descargar</a></li>
-                                        <li><a class="dropdown-item eliminar" href="" idA="<?php echo $archivo['id'];?>"><i class="material-icons">delete</i>Eliminar</a></li>
+                                        <li style="display: flex; align-items: center;"><i class="material-icons" style="height: 24px;">share</i><a class="dropdown-item compartir" href="#" id="<?php echo $archivo['id'];?>">Compartir</a></li>
+                                        <li style="display: flex; align-items: center;"><i class="material-icons" style="height: 24px;">download</i><a class="dropdown-item" href="<?php echo BASE_URL . 'Assets/archivos/'.$archivo['id_carpeta'].'/'.$archivo['nombre']?>" download="<?php echo $archivo['nombre']?>">Descargar</a></li>
+                                        <li style="display: flex; align-items: center;"><i class="material-icons" style="height: 24px;">delete</i><a class="dropdown-item eliminar" href="" idA="<?php echo $archivo['id'];?>">Eliminar</a></li>
                                     </ul>
                                 </div>
                             </div>

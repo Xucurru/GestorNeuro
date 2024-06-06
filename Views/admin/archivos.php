@@ -11,7 +11,7 @@
                             <h1>Archivos</h1>
                         </div>
                         <div class="page-description-actions">
-                            <a href="#" class="btn btn-primary" id="btnUpload"><i class="material-icons">add</i>Subir Archivo</a>
+                            <a href="#" class="btn btn-primary" id="btnUpload"><i class="material-icons" style="margin-right: -10px;margin-left: -10px;">add</i></a>
                         </div>
                     </div>
                 </div>

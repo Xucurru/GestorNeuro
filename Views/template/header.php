@@ -32,7 +32,14 @@
 if (empty($_SESSION['nombre'])) {
     header("Location: ".BASE_URL);
     exit();
-} ?>
+} 
+
+$protocolo = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+$host = $_SERVER['HTTP_HOST'];
+$requestUri = $_SERVER['REQUEST_URI'];
+$url = $protocolo . $host . $requestUri;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,17 +59,24 @@ if (empty($_SESSION['nombre'])) {
             <div class="app-menu">
                 <ul class="accordion-menu">
                     <li class="sidebar-title">
-                        Apps
-                    </li>
+                        FUNCIONES
+                    </li><?php
+                        if (strpos($url, "usuarios")) {
+                            $active = 1;
+                        } elseif (strpos($url, "compartidos")) {
+                            $active = 2;
+                        } else {
+                            $active = 3;
+                        }?>
                     <?php if ($_SESSION['estado'] == 2) { ?>
-                        <li class="active-page">
-                            <a href="<?php echo BASE_URL . 'usuarios' ?>" class="active"><i class="material-icons">person</i>Usuarios</a>
+                        <li <?php if($active==1){ echo 'class="active-page"';}?>>
+                            <a href="<?php echo BASE_URL . 'usuarios' ?>" class="active"><i class="material-icons" id="saturado">person</i>Usuarios</a>
                         </li>
                     <?php } ?>
-                    <li>
+                    <li <?php if($active==3){ echo 'class="active-page"';}?>>
                         <a href="<?php echo BASE_URL . 'admin' ?>"><i class="material-icons-two-tone">cloud_queue</i>Mis archivos</a>
                     </li>
-                    <li>
+                    <li <?php if($active==2){ echo 'class="active-page"';}?>>
                         <a href="<?php echo BASE_URL . 'compartidos' ?>"><i class="material-icons-two-tone">inbox</i>Compartidos<span class="badge rounded-pill badge-danger float-end"></span></a>
                     </li>
 
@@ -137,3 +151,5 @@ if (empty($_SESSION['nombre'])) {
             </div>
             <div class="app-content">
                 <div class="content-wrapper">
+
+                

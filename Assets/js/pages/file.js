@@ -40,7 +40,7 @@ const archivos = document.querySelectorAll(".archivos");
 document.addEventListener("DOMContentLoaded", function () {
   //funcion mostrar modal principal
   btnUpload.addEventListener("click", function () {
-    myModal.show();
+    myModal1.show();
   });
   btnUpload2.addEventListener("click", function () {
     myModal.show();
