@@ -95,14 +95,14 @@ class Compartido extends Controller
         die();
     }
 
-    //ver archivos
-    public function ver($id_carpeta){
-        $data['active'] = 'detalle';
-        $data['title'] = 'Neuro - Archivos';
-        //$data['script'] = 'file.js';
-        $data['archivos'] = $this->model->getArchivos($id_carpeta, $this->id_usuario);
-        $this->views->getView('admin', 'archivos', $data);
-    }
+    // //ver archivos
+    // public function ver($id_carpeta){
+    //     $data['active'] = 'detalle';
+    //     $data['title'] = 'Neuro - Archivos';
+    //     $data['script'] = 'file.js';
+    //     $data['archivos'] = $this->model->getArchivos($id_carpeta, $this->id_usuario);
+    //     $this->views->getView('admin', 'archivos', $data);
+    // }
 
   
 

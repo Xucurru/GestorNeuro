@@ -1,0 +1,9 @@
+<?php
+class ErrorpageModel extends Query{
+    public function __construct()
+    {
+        parent::__construct();
+    }
+}
+
+?>

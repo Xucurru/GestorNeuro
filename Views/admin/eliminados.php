@@ -11,7 +11,7 @@
                             <h1>Archivos Eliminados</h1>
                         </div>
                         <div class="page-description-actions">
-                            <a href="#" class="btn btn-primary" id="btnUpload"><i class="material-icons">add</i>Subir Archivo</a>
+                            <a href="#" class="btn btn-primary" id="btnUpload"><i class="material-icons">add</i>Nueva Carpeta</a>
                         </div>
                     </div>
                 </div>
@@ -27,7 +27,8 @@
                                     <span class="p-h-sm text-muted"><?php echo $archivo['fecha'] ?></span>
                                     <a href="#" class="dropdown-toggle file-manager-recent-file-actions" id="file-manager-recent-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="file-manager-recent-1">
-                                        <li><a class="dropdown-item restaurar" href="#">Restaurar</a></li>
+                                    <li style="display: flex; align-items: center;" idr="<?php echo $archivo['id'] ?>" class="restaurar"><i class="material-icons" style="height: 24px;">history</i><a class="dropdown-item" href="#">Restaurar</a></li>
+                                    <li style="display: flex; align-items: center;" ided="<?php echo $archivo['id'] ?>" nombre="<?php echo $archivo['nombre'] ?>" class="eliminarDef"><i class="material-icons" style="height: 24px;">delete</i><a class="dropdown-item" href="#">Eliminar Definitivamente</a></li>
                                     </ul>
                                 </div>
                             </div>

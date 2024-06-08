@@ -48,3 +48,12 @@ function eliminarRegistro(title, text, accion, url, table) {
     }
   });
 }
+
+//Acorta la longitud de un string
+function acortarString(str, tam) {
+  if (str.length > tam) {
+    return str.substring(0, 50) + "...";
+  } else {
+    return str;
+  }
+}

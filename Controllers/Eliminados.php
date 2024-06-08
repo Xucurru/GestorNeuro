@@ -95,16 +95,40 @@ class Eliminados extends Controller
         die();
     }
 
-    //ver archivos
-    public function ver($id_carpeta){
-        $data['active'] = 'detalle';
-        $data['title'] = 'Neuro - Archivos';
-        //$data['script'] = 'file.js';
-        $data['archivos'] = $this->model->getArchivos($id_carpeta, $this->id_usuario);
-        $this->views->getView('admin', 'archivos', $data);
+    // //ver archivos
+    // public function ver($id_carpeta){
+    //     $data['active'] = 'detalle';
+    //     $data['title'] = 'Neuro - Archivos';
+    //     $data['script'] = 'file.js';
+    //     $data['archivos'] = $this->model->getArchivosC($id_carpeta, $this->id_usuario);
+    //     $this->views->getView('admin', 'archivos', $data);
+    // }
+
+    public function restaurar($id_archivo){
+        $data = $this->model->restaurar($id_archivo,$this->id_usuario);
+
+        if ($data == 1) {
+            $res = array('tipo' => 'success', 'mensaje' => 'El archivo se ha restaurado');
+            echo json_encode($res);
+        } else {
+            $res = array('tipo' => 'error', 'mensaje' => 'Error al restaurar el archivo');
+            echo json_encode($res);
+        }
+        die();
     }
 
-  
+    public function eliminarDef($id_archivo){
+        $data = $this->model->eliminarDef($id_archivo,$this->id_usuario);
+
+        if ($data == 1) {
+            $res = array('tipo' => 'success', 'mensaje' => 'El archivo se ha eliminado definitivamente');
+            echo json_encode($res);
+        } else {
+            $res = array('tipo' => 'error', 'mensaje' => 'Error al eliminar el archivo definitivamente');
+            echo json_encode($res);
+        }
+        die();
+    }
 
 
 }

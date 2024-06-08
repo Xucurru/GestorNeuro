@@ -13,6 +13,13 @@ class EliminadosModel extends Query
         return $this->selectAll($sql);
     }
 
+    //Funcion que lista los archivo de 1 usuario y carpeta
+    public function getArchivosC($id_usuario, $id_carpeta)
+    {
+        $sql = "SELECT a.* FROM archivos a INNER JOIN carpetas c ON a.id_carpeta = c.id WHERE  c.id_usuario = $id_usuario AND a.id_carpeta = $id_carpeta AND a.estado != 1 ORDER BY a.id DESC";
+        return $this->selectAll($sql);
+    }
+
     //Funcion que lista todas las carpetas de 1 usuario
     public function getcarpetas($id_usuario)
     {
@@ -61,6 +68,17 @@ class EliminadosModel extends Query
         return $this->selectAll($sql);
     }
     
+    public function restaurar($id_archivo, $id_usuario){
+        $sql = "UPDATE archivos SET estado = ? WHERE id = ?";
+        $datos = array(1, $id_archivo);
+        return $this->save($sql, $datos);
+    }
+
+    public function eliminarDef($id_archivo, $id_usuario){
+        $sql = "DELETE FROM archivos WHERE estado = ? AND id = ?";
+        $datos = array(0, $id_archivo);
+        return $this->save($sql, $datos);
+    }
 }
 
 ?>

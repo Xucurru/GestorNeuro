@@ -11,7 +11,7 @@
                             <h1>Archivos Compartidos</h1>
                         </div>
                         <div class="page-description-actions">
-                            <a href="#" class="btn btn-primary" id="btnUpload"><i class="material-icons" style="margin-right: -10px;margin-left: -10px;">add</i>Subir Archivo</a>
+                            <a href="#" class="btn btn-primary" id="btnUpload"><i class="material-icons">add</i>Nueva Carpeta</a>
                         </div>
                     </div>
                 </div>
@@ -27,7 +27,7 @@
                                     <span class="p-h-sm text-muted">hace 4 dias</span>
                                     <a href="#" class="dropdown-toggle file-manager-recent-file-actions" id="file-manager-recent-1" data-bs-toggle="dropdown" aria-expanded="false"><i class="material-icons">more_vert</i></a>
                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="file-manager-recent-1">
-                                        <li style="display: flex; align-items: center;"><i class="material-icons" style="height: 24px;">person_off</i><a class="dropdown-item" href="#">Dejar de Compartir</a></li>
+                                        <li class="compartido" idd="<?php echo $archivo['id_compartido'];?>" style="display: flex; align-items: center;" correo="<?php echo $archivo['correo'];?>" nombre="<?php echo $archivo['nombre'] ?>"><i class="material-icons" style="height: 24px;">person_off</i><a class="dropdown-item" href="#">Dejar de Compartir</a></li>
                                     </ul>
                                 </div>
                                 

@@ -1,19 +1,4 @@
 /*------------------------------------------------------------
-[Table of contents]
-
-1. Global Styles
-2. CSS Utilities
-3. Layout
-4. UI Elements
-5. Components
-6. Charts
-7. Plugins
-8. Apps
-9. Responsive
-
-------------------------------------------------------------*/
-
-/*------------------------------------------------------------
 [1. Estilos Globales]
 ------------------------------------------------------------*/
 
@@ -72,10 +57,6 @@ a:hover, a:active, a:focus {
 b, strong, .bold {
     font-weight: 600;
 }
-
-/*------------------------------------------------------------
-[1. Global Styles]
-------------------------------------------------------------*/
 
 /* Overflow */
 
@@ -646,10 +627,6 @@ h1, h2, h3, h4, h5, h6 {
     color: #8e98a5;
 }
 
-/*------------------------------------------------------------
-[3. Layout]
-------------------------------------------------------------*/
-
 /* App */
 
 .app {
@@ -743,7 +720,7 @@ h1, h2, h3, h4, h5, h6 {
     bottom: 0px;
     transform: translateX(-2.5px);
     border-radius: 2.5px;
-    background: #2269F5;
+    background: #ff4500;
 }
 
 .app-header .nav-notifications-toggle {
@@ -1037,7 +1014,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .app-menu>ul>li>a:hover, .app-menu>ul>li.open>a, .app-menu>ul>li.active-page>a {
-    color: #2269F5;
+    color: #ff4500;
 }
 
 .app-menu>ul>li>a:hover {
@@ -1330,7 +1307,7 @@ h1, h2, h3, h4, h5, h6 {
     .menu-hover .app-menu>ul>li:hover>a {
         padding-left: 20px;
         margin-right: 40px;
-        color: #2269F5;
+        color: #ff4500;
     }
     
     .menu-dark.menu-hover .app-menu>ul>li:hover>a {
@@ -6522,7 +6499,7 @@ span.flatpickr-weekday {
 .app-error .app-error-info h5 {
     font-size: 96px;
     font-weight: 800;
-    color: #2269F5;
+    color: #ff4500;
 }
 
 .app-error .app-error-info span {

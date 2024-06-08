@@ -96,19 +96,19 @@ class Archivos extends Controller
         die();
     }
 
-    //ver archivos
-    public function ver($id_carpeta)
-    {
-        $data['active'] = 'detalle';
-        $data['title'] = 'Neuro - Archivos';
-        $data['script'] = 'file.js';
-        $data['archivos'] = $this->model->getArchivos($id_carpeta, $this->id_usuario);
-        $this->views->getView('admin', 'archivos', $data);
-    }
+    // //ver archivos
+    // public function ver($id_carpeta)
+    // {
+    //     $data['active'] = 'detalle';
+    //     $data['title'] = 'Neuro - Archivos';
+    //     $data['script'] = 'file.js';
+    //     $data['archivos'] = $this->model->getArchivos($id_carpeta, $this->id_usuario);
+    //     $this->views->getView('admin', 'archivos', $data);
+    // }
 
     public function papelera($id)
     {
-      $data = $this->model->papelera($id);
+        $data = $this->model->papelera($id);
         if ($data == 1) {
             $res = array('tipo' => 'success', 'mensaje' => 'Archivo Eliminado');
             echo json_encode($res);
@@ -144,12 +144,11 @@ class Archivos extends Controller
                     $result = $this->model->getDetalle($dato['correo'], $archivos[$i]);
                     if (empty($result)) {
                         $res = $this->model->compartirArchivo($dato['correo'], $archivos[$i], $this->id_usuario);
-                        $aja.= $archivos[$i] . ", ";
+                        $aja .= $archivos[$i] . ", ";
                     } else {
                         $res = 1;
                     }
                 }
-                
             }
             if ($res > 0) {
                 $res = array('tipo' => 'success', 'mensaje' => 'Archivos Compartidos');
@@ -163,6 +162,9 @@ class Archivos extends Controller
     public function verDetalle($id_carpeta)
     {
         $data = $this->model->getArchivosCompartidos($id_carpeta);
+        for ($i = 0; $i < count($data); $i++) {
+            $data[$i]['acciones'] = '';
+        }
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
     }
 
@@ -175,4 +177,31 @@ class Archivos extends Controller
         }
         echo json_encode($data);
     }
+
+    //Devuelve todas las carpetas del usuario menos la recibida
+    public function mostrarCarpetasMenos($idCarpeta)
+    {
+        $data = $this->model->mostrarCarpetasMenos($idCarpeta, $this->id_usuario);
+
+        for ($i = 0; $i < count($data); $i++) {
+            $data[$i]['acciones']  = '<a href="#" class="btn btn-info btn-sm" onclick="moverAs(' . $data[$i]['id'] .')">
+                     <span class="material-icons">drive_file_move</span>
+                 </a>';
+        }
+        echo json_encode($data);
+    }
+
+    public function moverA(){
+        $id_carpeta = $_POST['id_carpeta'];
+        $id_archivo =$_POST['id_archivo'];
+        $res = $this->model->moverA($id_carpeta, $id_archivo);
+
+        if ($res > 0) {
+            $res = array('tipo' => 'success', 'mensaje' => 'El archivo se ha movido de carpeta');
+        } else {
+            $res = array('tipo' => 'error', 'mensaje' => 'Error al mover el Archivo');
+        }
+        echo json_encode($res, JSON_UNESCAPED_UNICODE);
+    }
+
 }

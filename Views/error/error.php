@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Responsive Admin Dashboard Template">
+    <meta name="keywords" content="admin,dashboard">
+    <meta name="author" content="stacks">
+    
+    <!-- Title -->
+    <title>Neuro - Not Found</title>
+
+    <!-- Styles -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
+    <link href="<?php echo BASE_URL . 'Assets/plugins/bootstrap/css/bootstrap.min.css'; ?>" rel="stylesheet">
+    <link href="<?php echo BASE_URL . 'Assets/plugins/perfectscroll/perfect-scrollbar.css'; ?>" rel="stylesheet">
+    <link href="<?php echo BASE_URL . 'Assets/plugins/pace/pace.css';?>" rel="stylesheet">
+
+    
+    <!-- Theme Styles -->
+    <link href="<?php echo BASE_URL . 'Assets/css/main.css'; ?>" rel="stylesheet">
+    <link href="<?php echo BASE_URL . 'Assets/css/custom.css'; ?>" rel="stylesheet">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo BASE_URL . 'Assets/images/favicon.ico'; ?>" />
+    <link rel="icon" type="image/png" sizes="16x16" href="<?php echo BASE_URL . 'Assets/images/favicon.ico'; ?>" />
+
+</head>
+<body>
+    <div class="app app-error align-content-stretch d-flex flex-wrap">
+        <div class="app-error-info">
+            <h5>Upsss...</h5>
+            <span>Parece que la página que buscas no existe.<br>
+                Será mejor que vuelvas a la página principal
+            </span>
+            <a href="admin" class="btn btn-dark">Volver a Neuro</a>
+        </div>
+        <div class="app-error-background"></div>
+    </div>
+    
+    <!-- Javascripts -->
+    <script src="<?php echo BASE_URL . 'Assets/plugins/jquery/jquery-3.5.1.min.js'; ?>"></script>
+    <script src="<?php echo BASE_URL . 'Assets/plugins/bootstrap/js/bootstrap.min.js'; ?>"></script>
+    <script src="<?php echo BASE_URL . 'Assets/plugins/pace/pace.min.js'; ?>"></script>
+    <script src="<?php echo BASE_URL . 'Assets/js/main.min.js'; ?>"></script>
+    <script src="<?php echo BASE_URL . 'Assets/js/custom.js'; ?>"></script>
+</body>
+</html>

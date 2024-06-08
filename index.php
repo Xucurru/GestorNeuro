@@ -33,8 +33,11 @@ if (file_exists($dirControllers)) {
         $controller->$metodo($parametro);
     } else {
         echo 'No existe el modelo';
+        header("Location: $BASE_URL/GestorNeuro/errorpage");
+        exit();
     }
 } else {
     echo 'No existe el controlador';
+    header("Location: $BASE_URL/GestorNeuro/errorpage");
+    exit();
 }
-?>

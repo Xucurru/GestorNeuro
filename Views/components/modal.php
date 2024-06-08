@@ -74,7 +74,7 @@
             <form id="frmCompartir">
                 <div class="modal-body " style="max-height: 500px;">
                     <div id="container-archivos">
-                        <input type="text" id="id_archivo" name="archivos[]">
+                        <input type="hidden" id="id_archivo" name="archivos[]">
                     </div>
                     <select class="js-states form-control" id="usuarios" name="usuarios[]" multiple="multiple" tabindex="-1" style="display: none; width: 100%">
                     </select>
@@ -102,6 +102,31 @@
             </form>
 
 
+        </div>
+    </div>
+</div>
+
+
+<div id="modalMoverto" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="my-modal-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="title-Moverto">Mover a</h5>
+                <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body" id="move" style="max-height: 500px; margin-bottom: 30px;">
+                <table class="table table-striped table-hover diplay nowrap" style="width:100%" id="tblMove">
+                    <thead>
+                        <tr>
+                            <th>Mover</th>
+                            <th>Carpetas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+            </div>
         </div>
     </div>
 </div>

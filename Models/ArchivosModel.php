@@ -67,6 +67,21 @@ class ArchivosModel extends Query
         return $this->selectAll($sql);
     }
     
+        //Devuelve todas las carpetas del usuario menos la recibida
+        public function mostrarCarpetasMenos($id_carpeta, $id_usuario)
+        {
+            $sql = "SELECT * FROM carpetas WHERE id != $id_carpeta AND id_usuario = $id_usuario AND estado = 1 ORDER BY id DESC;";
+            return $this->selectAll($sql);
+        }
+
+    //Devuelve todas las carpetas del usuario menos la recibida
+    public function moverA($id_carpeta, $id_archivo,)
+    {
+        $sql = "UPDATE archivos SET id_carpeta= ? WHERE id = ?";
+        $datos = array($id_carpeta, $id_archivo);
+        return $this->save($sql, $datos);
+    }
+
 }
 
 ?>

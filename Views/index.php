@@ -27,7 +27,7 @@
     <link href="<?php echo BASE_URL . 'Assets/css/main.css'; ?>" rel="stylesheet">
     <link href="<?php echo BASE_URL . 'Assets/css/custom.css'; ?>" rel="stylesheet">
 
-    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo BASE_URL . 'Assets/images/favicon.favicon'; ?>" />
+    <link rel="icon" type="image/png" sizes="32x32" href="<?php echo BASE_URL . 'Assets/images/favicon.ico'; ?>" />
     <link rel="icon" type="image/png" sizes="16x16" href="<?php echo BASE_URL . 'Assets/images/favicon.ico'; ?>" />
 
 </head>

@@ -28,6 +28,7 @@ const usuarios = document.querySelector("#usuarios");
 const file = document.querySelector("#file");
 const container_archivos = document.querySelector("#container-archivos");
 const tblDetalle = document.querySelector("#tblDetalle tbody");
+const tblDetalleT = document.querySelector("#tblDetalle");
 
 //clases
 const carpetas = document.querySelectorAll(".carpetas");
@@ -35,6 +36,10 @@ const compartir = document.querySelectorAll(".compartir");
 const eliminar = document.querySelectorAll(".eliminar");
 const cards = document.querySelectorAll(".card");
 const archivos = document.querySelectorAll(".archivos");
+const compartidos = document.querySelectorAll(".compartido");
+const restaurars = document.querySelectorAll(".restaurar");
+const eliminarDef = document.querySelectorAll(".eliminarDef");
+
 
 //acciones botones
 document.addEventListener("DOMContentLoaded", function () {
@@ -137,7 +142,12 @@ document.addEventListener("DOMContentLoaded", function () {
     compartir.forEach((enlace) => {
       enlace.addEventListener("click", function (e) {
         e.preventDefault();
-        compartirArchivo(e.target.id);
+        if(e.target.getAttribute("carpeta") == null){
+          compartirArchivo(e.target.parentNode.id, e.target.parentNode.getAttribute("carpeta"));
+        }else{
+          compartirArchivo(e.target.id, e.target.getAttribute("carpeta"));
+        }
+        
       });
     });
 
@@ -147,8 +157,14 @@ document.addEventListener("DOMContentLoaded", function () {
         enlace.addEventListener("click", function (e) {
           e.preventDefault();
           id = e.target.getAttribute("ida");
-          let url = base_url + 'archivos/papelera/'+id
-          eliminarRegistro("¿Estas seguro de eliminar?", 'El archivo se enviará a la papelera', 'Eliminar', url, "ventana");
+          let url = base_url + "archivos/papelera/" + id;
+          eliminarRegistro(
+            "¿Estas seguro de eliminar?",
+            "El archivo se enviará a la papelera",
+            "Eliminar",
+            url,
+            "ventana"
+          );
         });
       });
     }
@@ -181,6 +197,23 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       cache: true,
     },
+    language: {
+      errorLoading: function () {
+        return "Por favor, ingresa al menos un carácter";
+      },
+      maximumSelected: function (args) {
+        return "Solo puedes agregar 5 usuarios a la vez";
+      },
+      inputTooShort: function () {
+        return "Por favor, ingresa al menos un carácter";
+      },
+      searching: function () {
+        return "Buscando...";
+      },
+      noResults: function () {
+        return "No se encontraron resultados";
+      },
+    },
   });
   if (frmCompartir) {
     //submit de compartir
@@ -200,7 +233,7 @@ document.addEventListener("DOMContentLoaded", function () {
             alertaPersonalizada(res.tipo, res.mensaje);
 
             if (res.tipo == "success") {
-              verArchivos(id_carpeta.value);
+              verArchivos();
             }
           }
         };
@@ -215,7 +248,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
   if (archivos) {
-    document.addEventListener('click', function(event) {
+    document.addEventListener("click", function (event) {
       // Verifica si el clic ocurrió fuera de los elementos de archivo
       let isClickInside = false;
       archivos.forEach(function (archivo) {
@@ -223,18 +256,20 @@ document.addEventListener("DOMContentLoaded", function () {
           isClickInside = true;
         }
       });
-    
+
       if (!isClickInside) {
         archivos.forEach(function (archivo) {
-          let puntos = archivo.querySelector('.file-manager-recent-file-actions');
-          let menu = archivo.querySelector('.dropdown-menu-end');
-          if (puntos.classList.contains('show')) {
+          let puntos = archivo.querySelector(
+            ".file-manager-recent-file-actions"
+          );
+          let menu = archivo.querySelector(".dropdown-menu-end");
+          if (puntos.classList.contains("show")) {
             puntos.classList.remove("show");
             puntos.setAttribute("aria-expanded", false);
             menu.style.position = "";
             menu.style.inset = "";
             menu.style.margin = "";
-            menu.style.transform  = "";
+            menu.style.transform = "";
             menu.classList.remove("show");
           }
         });
@@ -242,71 +277,80 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     archivos.forEach(function (archivo) {
-      archivo.addEventListener('click', function(){
-        let puntos = archivo.querySelector('.file-manager-recent-file-actions');
-        let menu = (archivo.querySelector('.dropdown-menu-end'));
-        
+      archivo.addEventListener("click", function () {
+        let puntos = archivo.querySelector(".file-manager-recent-file-actions");
+        let menu = archivo.querySelector(".dropdown-menu-end");
+
         //cerrar los otros menus
         archivos.forEach(function (otherArchivo) {
           if (otherArchivo !== archivo) {
-            let otherPuntos = otherArchivo.querySelector('.file-manager-recent-file-actions');
-            let otherMenu = otherArchivo.querySelector('.dropdown-menu-end');
-            if (otherPuntos.classList.contains('show')) {
+            let otherPuntos = otherArchivo.querySelector(
+              ".file-manager-recent-file-actions"
+            );
+            let otherMenu = otherArchivo.querySelector(".dropdown-menu-end");
+            if (otherPuntos.classList.contains("show")) {
               otherPuntos.classList.remove("show");
               otherPuntos.setAttribute("aria-expanded", false);
               otherMenu.style.position = "";
               otherMenu.style.inset = "";
               otherMenu.style.margin = "";
-              otherMenu.style.transform  = "";
+              otherMenu.style.transform = "";
               otherMenu.classList.remove("show");
             }
           }
         });
-        if (puntos.classList.contains('show')) {
-          puntos.classList.remove("show")
+        if (puntos.classList.contains("show")) {
+          puntos.classList.remove("show");
           puntos.setAttribute("aria-expanded", false);
           menu.style.position = "";
           menu.style.inset = "";
           menu.style.margin = "";
-          menu.style.transform  = "";
-          menu.classList.remove("show")
-
-        }else{
-  
-          puntos.classList.add("show")
+          menu.style.transform = "";
+          menu.classList.remove("show");
+        } else {
+          puntos.classList.add("show");
           puntos.setAttribute("aria-expanded", true);
 
           menu.classList.add("show");
           menu.style.position = "absolute";
           menu.style.inset = "0px auto auto 0px";
           menu.style.margin = "0px 0px 0px 0px";
-          menu.style.transform  = "translate(50%, 50px)";
+          menu.style.transform = "translate(50%, 50px)";
         }
-        
       });
-
     });
   }
   if (cards) {
     cards.forEach(function (card) {
-      var links = card.querySelectorAll("a");
+      let links = card.querySelectorAll("a");
       links.forEach(function (link) {
         link.addEventListener("click", function (event) {
-
-          if(link.parentNode.tagName == "LI"){
-          }else{
+          if (link.parentNode.tagName == "LI") {
+          } else {
             event.preventDefault();
-
           }
-          
         });
       });
     });
   }
 });
 
-function compartirArchivo(id) {
+function compartirArchivo(id, carpeta) {
   id_archivo.value = id;
+  id_carpeta.value = carpeta;
+
+  verArchivos();
+
+  setTimeout(function () {
+    let chekboxs = document.querySelectorAll(".form-check-input");
+    chekboxs.forEach((chek) => {
+      console.log();
+      if (!chek.id.includes(id)) {
+        chek.checked = false;
+      }
+    });
+  }, 50);
+
   myModal3.show();
 }
 
@@ -321,6 +365,7 @@ function verArchivos() {
     if (this.readyState == 4 && this.status == 200) {
       let res = JSON.parse(this.responseText);
       if (res.length > 0) {
+        tblDetalleT.style.display = "block";
         html = "";
         res.forEach((archivo) => {
           html += `<div class="form-check">
@@ -340,6 +385,7 @@ function verArchivos() {
     </div>`;
 
         tblDetalle.innerHTML = "";
+        tblDetalleT.style.display = "none";
       }
       container_archivos.innerHTML = html;
       myModal2.hide();
@@ -366,7 +412,7 @@ function cargarDetalle(idCarpeta) {
           html +=
             "<tr>" +
             "<td>" +
-            acortarString(detalle.nombre, 12) +
+            acortarString(detalle.nombre, 50) +
             "</td>" +
             "<td>" +
             detalle.correo +
@@ -392,14 +438,115 @@ function cargarDetalle(idCarpeta) {
   };
 }
 
-//Acorta la longitud de un string
-function acortarString(str, tam) {
-  if (str.length > tam) {
-    return str.substring(0, 12) + "...";
-  } else {
-    return str;
-  }
+if (compartidos) {
+  compartidos.forEach((compartido) => {
+    compartido.addEventListener("click", function (event) {
+      event.preventDefault();
+      let cor = event.target.getAttribute("correo");
+      let nom = event.target.getAttribute("nombre");
+      let pasar = event.target;
+      if (cor == null) {
+        nom = event.target.parentNode.getAttribute("nombre");
+        cor = event.target.parentNode.getAttribute("correo");
+        pasar = event.target.parentNode;
+      }
+
+      Swal.fire({
+        title: "Quieres dejar de compartir?",
+        text: "El archivo " + nom + ", se dejara de compartir con " + cor,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Si",
+        cancelButtonText: "Cancelar",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          eliminarCompartido(pasar);
+        }
+      });
+    });
+  });
 }
+
+if (restaurars) {
+  restaurars.forEach((restaurar) => {
+    restaurar.addEventListener("click", function (event) {
+      event.preventDefault();
+      let idr = event.target.getAttribute("idr");
+
+      if (idr == null) {
+        idr = event.target.parentNode.getAttribute("idr");
+      }
+      console.log(idr);
+      const http = new XMLHttpRequest();
+      const url = base_url + "eliminados/restaurar/" + idr;
+
+      http.open("GET", url, true);
+      http.send();
+
+      http.onreadystatechange = function () {
+        if (this.readyState == 4) {
+          if (this.status == 200) {
+            let res = JSON.parse(this.responseText);
+            alertaPersonalizada(res.tipo, res.mensaje);
+
+            setTimeout(function () {
+              window.location.reload();
+            }, 1500);
+          }
+        }
+      };
+    });
+  });
+}
+
+if (eliminarDef) {
+  eliminarDef.forEach((eliminarD) => {
+    eliminarD.addEventListener("click", function (event) {
+      event.preventDefault();
+      let idr = event.target.getAttribute("ided");
+      let nom = event.target.getAttribute("nombre");
+
+      if (idr == null) {
+        idr = event.target.parentNode.getAttribute("ided");
+        nom = event.target.parentNode.getAttribute("nombre");
+      }
+
+      Swal.fire({
+        title: "Quieres eliminar definitivamente este archivo?",
+        text: "El archivo " + nom + ", dejara de existir ",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Si, Eliminar",
+        cancelButtonText: "Cancelar",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          
+          const http = new XMLHttpRequest();
+          const url = base_url + "eliminados/eliminarDef/" + idr;
+          http.open("GET", url, true);
+          http.send();
+          http.onreadystatechange = function () {
+            if (this.readyState == 4) {
+              if (this.status == 200) {
+                let res = JSON.parse(this.responseText);
+                alertaPersonalizada(res.tipo, res.mensaje);
+
+                setTimeout(function () {
+                  window.location.reload();
+                }, 1500);
+              }
+            }
+          };
+        }
+      });
+    });
+  });
+}
+
 
 //cambia el active si es /archivos
 if (window.location.href.includes("archivos")) {
@@ -457,7 +604,13 @@ function eliminarCompartido(button) {
       alertaPersonalizada(res.tipo, res.mensaje);
 
       if (res.tipo == "success") {
-        verArchivos();
+        if (button.getAttribute("correo")) {
+          setTimeout(function () {
+            window.location.reload();
+          }, 1500);
+        } else {
+          verArchivos();
+        }
       }
     }
   };

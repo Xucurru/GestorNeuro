@@ -9,7 +9,7 @@ class CompartidoModel extends Query
     //Funcion que lista los archivo de 1 carpeta
     public function getArchivos($id_usuario)
     {
-        $sql = "SELECT a.*, d.fecha_add, d.correo FROM archivos a INNER JOIN detalle_archivos d ON a.id = d.id_archivo WHERE  d.id_usuario = 1 AND a.estado = 1 ORDER BY a.id DESC";
+        $sql = "SELECT a.*, d.fecha_add, d.correo, d.id as id_compartido FROM archivos a INNER JOIN detalle_archivos d ON a.id = d.id_archivo WHERE  d.id_usuario = $id_usuario AND d.estado = 1 AND a.estado = 1 ORDER BY a.id DESC";
         return $this->selectAll($sql);
     }
 

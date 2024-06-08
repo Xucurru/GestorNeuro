@@ -36,10 +36,10 @@ class Compartidos extends Controller
     {
         $data = $this->model->delete($id);
         if ($data == 1) {
-            $res = array('tipo' => 'success', 'mensaje' => 'Archivo Eliminado');
+            $res = array('tipo' => 'success', 'mensaje' => 'El archivo se ha dejado de compartir');
             echo json_encode($res);
         } else {
-            $res = array('tipo' => 'error', 'mensaje' => 'Error al eliminar el archivo');
+            $res = array('tipo' => 'error', 'mensaje' => 'Error al dejar de compartir el archivo');
             echo json_encode($res);
         }
         die();
